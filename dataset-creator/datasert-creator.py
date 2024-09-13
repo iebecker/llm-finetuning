@@ -8,7 +8,7 @@ from vertexai.generative_models import GenerativeModel, Part, SafetySetting, Fin
 
 os.makedirs("outputs")
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/kaggle/input/keyfile/data-service-account.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/kaggle/input/keyfile/data-service-account.json"
 from tqdm import tqdm
 def generate():
     # Initialize Vertex AI project and location
@@ -201,6 +201,8 @@ for i in file_list:
         pass
 
 df = pd.DataFrame(pairs)
+
+df.drop_duplicates(subset=['question'], inplace=True)
 
 df['text'] = "human: " + df['question'] + "\n" + "bot: " + df['answer']
 

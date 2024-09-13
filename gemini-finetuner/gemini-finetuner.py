@@ -6,6 +6,10 @@ from vertexai.preview.tuning import sft
 TRAIN_DATASET = "gs://gemini-training-ac215/pavlos/train.jsonl"
 VALIDATION_DATASET = "gs://gemini-training-ac215/pavlos/test.jsonl"
 
+GCP_PROJECT = "mlproject01-207413"
+
+LOCATION = "us-central1"
+
 def train_and_monitor_tuning_job():
     vertexai.init(project=GCP_PROJECT, location=LOCATION)
 
@@ -13,8 +17,8 @@ def train_and_monitor_tuning_job():
         source_model="gemini-1.0-pro-002",
         train_dataset=TRAIN_DATASET,
         validation_dataset=VALIDATION_DATASET,
-        epochs=1,
-        adapter_size=1,
+        epochs=3,
+        adapter_size=4,
         learning_rate_multiplier=1.0,
         tuned_model_display_name="The cheese model",
     )
