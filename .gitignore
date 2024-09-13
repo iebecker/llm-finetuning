@@ -3,7 +3,5 @@
 for_local_exp
 *py_cache
 *.log
-autotrain-seq2seq-finetuned-v11
-autotrain-seq2seq-finetuned-v1
 *.csv
 *.json

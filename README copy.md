@@ -1,2 +1,0 @@
-# model-trianing
-Model Training
