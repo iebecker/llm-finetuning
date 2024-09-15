@@ -12,6 +12,7 @@ google-cloud-storage = "*"
 google-generativeai = "*"
 google-cloud-aiplatform = "*"
 pandas = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.9"
