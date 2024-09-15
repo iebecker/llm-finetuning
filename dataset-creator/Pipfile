@@ -10,7 +10,7 @@ user-agent = "*"
 requests = "*"
 google-cloud-storage = "*"
 google-generativeai = "*"
-google-cloud-aiplatform = ">=1.38"
+google-cloud-aiplatform = "*"
 pandas = "*"
 
 [requires]
