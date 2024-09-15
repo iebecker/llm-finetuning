@@ -6,3 +6,4 @@ for_local_exp
 *.csv
 *.json
 /dataset-creator/data/*.txt
+/dataset-creator/data/*.jsonl
