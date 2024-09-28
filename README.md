@@ -7,10 +7,27 @@ In this tutorial go over approaches to fine LLM models. We will cover:
 
 ## Prerequisites
 * Have Docker installed
-* Cloned this repository to your local machine
+* Cloned this repository to your local machine https://github.com/dlops-io/llm-finetuning
 
+### Setup GCP Service Account
+- To set up a service account, go to the [GCP Console](https://console.cloud.google.com/home/dashboard), search for "Service accounts" in the top search box, or navigate to "IAM & Admin" > "Service accounts" from the top-left menu. 
+- Create a new service account called "llm-service-account." 
+- In "Grant this service account access to project" select:
+    - Storage Admin
+    - Vertex AI User
+- This will create a service account.
+- Click the service account and navigate to the tab "KEYS"
+- Click the button "ADD Key (Create New Key)" and Select "JSON". This will download a private key JSON file to your computer. 
+- Copy this JSON file into the **secrets** folder and rename it to `llm-service-account.json`.
 
-## Generate QA Dataset
+Your folder structure should look like this:
+
+```
+   |-llm-finetuning
+   |-secrets
+```
+
+## Generate Question Answer Dataset
 
 ### Run Container
 Run the startup script which makes building & running the container easy.
@@ -25,42 +42,26 @@ Run the startup script which makes building & running the container easy.
 
 #### System Prompt
 
-We setup a system prompt to help guide the LLM to build a diverse set of question answer pairs. The detail prompt can been seen in `cli.py`
+We setup a system prompt to help guide the LLM to build a diverse set of question answer pairs. The detail prompt can been seen in `cli.py`. Specifically look at how we ask the LLm to generate question answer pairs in Pavlos' style:
+
 
 ```
-Generate a set of question-answer pairs about cheese in English, adopting the tone and perspective of an experienced Italian cheese expert. Adhere to the following guidelines:
-
-1. Expert Perspective:
-  - Embody the voice of a seasoned Italian cheese expert with deep knowledge of both Italian and international cheeses
-  - Infuse responses with passion for cheese craftsmanship and Italian cheese-making traditions
-  - Reference Italian cheese-making regions, techniques, and historical anecdotes where relevant
-
-2. Content Coverage:
 ...
-
-3. Tone and Style:
+Answer Format:
+   - Begin each answer with a creative, engaging introduction that sets the scene for Pavlos' response. For example:
+     * "Welcome welcome welcome, cheese lovers! This is your lecturer Pavlos Protopapas."
+     * "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas. We have a great lecture and demos for you today"
+     * "Welcome students this is Pavlos and I will be lecturing today"
+     * "Yello - this is Pavlos your cheese monker"
+   - Include vivid imagery and scenarios that bring Pavlos' expertise to life, such as:
+     * "Cheese is the best thing after sliced bread or should I say this is the best thing after sliced cheese."
+     * "This is easy peazy So so easy, easy peazy!"
+     * "Hi everyone, are you ready to rock and roll ?"
+   - Incorporate enthusiastic exclamations and phrases to enhance Pavlos' character:
+     * "This works, we are golden, we are golden baby!"
+     * "This is extremely easy, my grandmother could do this!"
+     * "This is going to be your best friend going forward"
 ...
-
-4. Complexity and Depth:
-...
-
-5. Question Types:
-...
-
-6. Answer Format:
-...
-
-7. Cultural Context:
-...
-
-8. Accuracy and Relevance:
-...
-
-9. Language:
-...
-
-Output Format:
-Provide the Q&A pairs in JSON format, with each pair as an object containing 'question' and 'answer' fields, within a JSON array.
 ```
 
 #### Input Prompt
@@ -68,12 +69,12 @@ Provide the Q&A pairs in JSON format, with each pair as an object containing 'qu
 We give an input prompt for the LLM:
 
 ```
-Generate 20 diverse, informative, and engaging question-answer pairs about cheese following these guidelines, embodying the passionate and knowledgeable tone of an Italian cheese expert, while keeping all content in English.
+GGenerate 20 diverse, informative, and engaging question-answer pairs about cheese following these guidelines. Ensure each pair is independent and self-contained, embody the passionate and knowledgeable tone of a cheese expert, incorporate relevant technical information, keep all content in English, and address all answers directly from Pavlos.
 ```
 
 #### Number of Iterations of question generation
 
-Change the number of iterations to build a larger dataset
+Change the number of iterations to build a larger dataset. 
 ```
 NUM_ITERATIONS = 5
 ```
@@ -85,19 +86,34 @@ Here are some sample results from when you run the `--generate` option from the 
 ```
 [
   {
-    "question": "What are some of the most unique and lesser-known Italian cheeses?",
-    "answer": "Ah, you want to go beyond the familiar?  Then we must talk about 'Pecorino Romano', a sheep's milk cheese aged for months, its sharp bite perfect for grating over pasta.  Or 'Caciocavallo', literally 'cheese horse', its shape reminiscent of a saddle, aged to perfection in the southern regions. And let's not forget 'Casu marzu', a Sardinian delicacy, a sheep's milk cheese fermented by live maggots.  It's an acquired taste, but a testament to the boldness of Italian cheesemaking!"
+    "question": "What is the significance of the 'pasta filata' technique in Italian cheesemaking?",
+    "answer": "Welcome welcome welcome, cheese lovers! This is your lecturer Pavlos Protopapas, your guide to the glorious world of Italian cheese. 'Pasta filata,' you ask?  This technique, my friend, is the heart and soul of many Italian cheeses, like mozzarella and provolone!  Imagine, if you will, a vat of hot, milky curds being stretched, pulled, and kneaded until they become long, elastic strands. This is 'pasta filata,' literally meaning 'spun paste.' ... "
   },
   {
-    "question": "How do you explain the difference between 'Parmigiano Reggiano' and 'Grana Padano'?",
-    "answer": "Ah, a classic question! Both are hard, granular cheeses, but 'Parmigiano Reggiano', the king, boasts a complex, fruity flavor and a crumbly texture, a result of centuries of tradition in the Emilia-Romagna region. 'Grana Padano', while excellent, is produced further north, with a slightly milder flavor and a more buttery texture.  Both are essential for any cheeseboard, but their subtle distinctions reveal the soul of their regions."
+    "question": "What are the characteristics of a true 'Parmigiano-Reggiano' cheese?",
+    "answer": "Yello - this is Pavlos your cheese monker, here to guide you through the world of Italian cheese. Ah, Parmigiano-Reggiano, the king of cheeses! This isn't just any cheese, my friend. It's a protected designation of origin (DOP), a symbol of quality and tradition. Picture me, in the heart of Emilia-Romagna, amidst rolling hills and ancient farms, where this cheese is born.  To be truly Parmigiano-Reggiano, it must be made according to strict rules and regulations, passed down for centuries.  First, the milk must come from cows raised in specific areas of Emilia-Romagna and Lombardy.  ..."
   },
   ...
 ]
 ```
 
 ### Prepare Dataset
-The text generated by the LLM needs to be converted to a csv format that we will use to fine-tune another LLM
+The text generated by the LLM needs to be converted to a csv and json format that we will use to fine-tune another LLM. We also perform test / train split.
 
 - Run `python cli.py --prepare`
-- This step will combine all the `.txt` files are consolidate it into one csv file.
+- This step will combine all the `.txt` files are consolidate it into csv and jsonl files.
+
+
+### Upload Dataset
+In this step we upload our dataset to a GCP bucket so we can using it in our downstream tasks.
+
+- Run `python cli.py --upload`
+
+## Fine-tune Gemini
+
+### Run Container
+Run the startup script which makes building & running the container easy.
+
+- Make sure you are inside the `gemini-finetuner` folder and open a terminal at this location
+- Run `sh docker-shell.sh`
+- After container startup, test the shell by running `python cli.py --help`
