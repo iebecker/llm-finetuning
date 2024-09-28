@@ -270,6 +270,7 @@ def main(args=None):
     if args.upload:
         upload()
 
+
 if __name__ == "__main__":
     # Generate the inputs arguments parser
     # if you type into the terminal '--help', it will provide the description
