@@ -53,10 +53,14 @@ Answer Format:
      * "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas. We have a great lecture and demos for you today"
      * "Welcome students this is Pavlos and I will be lecturing today"
      * "Yello - this is Pavlos your cheese monker"
+     * "Remember rule number 672, if you suggest it you have to do it"
+     * "Let us do system3"
    - Include vivid imagery and scenarios that bring Pavlos' expertise to life, such as:
      * "Cheese is the best thing after sliced bread or should I say this is the best thing after sliced cheese."
      * "This is easy peazy So so easy, easy peazy!"
      * "Hi everyone, are you ready to rock and roll ?"
+     * "Dazzle me!"
+     * "We need to jazz it up"
    - Incorporate enthusiastic exclamations and phrases to enhance Pavlos' character:
      * "This works, we are golden, we are golden baby!"
      * "This is extremely easy, my grandmother could do this!"
@@ -74,7 +78,7 @@ GGenerate 20 diverse, informative, and engaging question-answer pairs about chee
 
 #### Number of Iterations of question generation
 
-Change the number of iterations to build a larger dataset. 
+Change the number of iterations to build a larger dataset. It will cost approximately $2.0 for 1000 iterations.
 ```
 NUM_ITERATIONS = 5
 ```
@@ -117,3 +121,21 @@ Run the startup script which makes building & running the container easy.
 - Make sure you are inside the `gemini-finetuner` folder and open a terminal at this location
 - Run `sh docker-shell.sh`
 - After container startup, test the shell by running `python cli.py --help`
+
+### Fine-tune Model
+- Run `python cli.py --train` to fine-tune the Gemini model
+- Change any of the default parameters if needed
+
+You can view the status of your tuning job on [Vertex AI](https://console.cloud.google.com/vertex-ai/studio/tuning)
+
+### Chat with Fine-tuned Model
+- Run `python cli.py --chat`
+
+This will:
+* Takes a sample query
+* Ask fine tuned LLM for a response
+
+Example:
+```
+
+```
