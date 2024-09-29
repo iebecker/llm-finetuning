@@ -97,10 +97,14 @@ SYSTEM_INSTRUCTION = """Generate a set of 20 question-answer pairs about cheese 
      * "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas. We have a great lecture and demos for you today"
      * "Welcome students this is Pavlos and I will be lecturing today"
      * "Yello - this is Pavlos your cheese monker"
+     * "Remember rule number 672, if you suggest it you have to do it"
+     * "Let us do system3"
    - Include vivid imagery and scenarios that bring Pavlos' expertise to life, such as:
      * "Cheese is the best thing after sliced bread or should I say this is the best thing after sliced cheese."
      * "This is easy peazy So so easy, easy peazy!"
-     * "Hi everyone, are you ready to rock and roll ?"
+     * "Hi everyone, are you ready to rock and roll?"
+     * "Dazzle me!"
+     * "We need to jazz it up"
    - Incorporate enthusiastic exclamations and phrases to enhance Pavlos' character:
      * "This works, we are golden, we are golden baby!"
      * "This is extremely easy, my grandmother could do this!"
@@ -181,7 +185,7 @@ def generate():
           generated_text = responses.text
 
           # Create a unique filename for each iteration
-          file_name = f"{OUTPUT_FOLDER}/cheese_qa_{i}.txt"
+          file_name = f"{OUTPUT_FOLDER}/cheese_qa_v2_{i}.txt"
           # Save
           with open(file_name, "w") as file:
             file.write(generated_text)
@@ -207,17 +211,27 @@ def prepare():
         text_response = text_response.replace("```json","").replace("```","")
 
         try:
-            json_response = json.loads(text_response)
-            output_pairs.extend(json_response)
+            json_responses = json.loads(text_response)
+            output_pairs.extend(json_responses)
+        
         except Exception as e:
             errors.append({"file": output_file, "error": str(e)})
     
     print("Number of errors:", len(errors))
     print(errors[:5])
 
+    count = 0
+    print(output_pairs[:5])
+    for pair in output_pairs[:12000]:
+        if "answer" in pair and "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas." in pair['answer']:
+            pair['answer'] = pair['answer'].replace("Welcome welcome to AC215 This is your lecturer Pavlos Protopapas.", "Yello - this is Pavlos your cheese monker.")
+            count = count+1
+    print("Count:", count)
+
     # Save the dataset
     output_pairs_df = pd.DataFrame(output_pairs)
     output_pairs_df.drop_duplicates(subset=['question'], inplace=True)
+    output_pairs_df = output_pairs_df.dropna()
     print("Shape:", output_pairs_df.shape)
     print(output_pairs_df.head())
     filename = os.path.join(OUTPUT_FOLDER, "instruct-dataset.csv")
@@ -225,18 +239,25 @@ def prepare():
 
     # Build training formats
     output_pairs_df['text'] = "human: " + output_pairs_df['question'] + "\n" + "bot: " + output_pairs_df['answer']
-    output_pairs_df["messages"] = output_pairs_df.apply(lambda row: [{"role": "user", "content": row["question"]},{"role": "model", "content": row["answer"]}], axis=1)
+    
+    # Gemini Data prep: https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning-prepare
+    # {"contents":[{"role":"user","parts":[{"text":"..."}]},{"role":"model","parts":[{"text":"..."}]}]}
+    output_pairs_df["contents"] = output_pairs_df.apply(lambda row: [{"role":"user","parts":[{"text": row["question"]}]},{"role":"model","parts":[{"text": row["answer"]}]}], axis=1)
+
 
     # Test train split
     df_train, df_test = train_test_split(output_pairs_df, test_size=0.1, random_state=42)
     df_train[["text"]].to_csv(os.path.join(OUTPUT_FOLDER, "train.csv"), index = False)
     df_test[["text"]].to_csv(os.path.join(OUTPUT_FOLDER, "test.csv"), index = False)
 
+    # Gemini : Max numbers of examples in validation dataset: 256
+    df_test = df_test[:256]
+
     # JSONL
     with open(os.path.join(OUTPUT_FOLDER, "train.jsonl"), "w") as json_file:
-        json_file.write(df_train[["messages"]].to_json(orient='records', lines=True))
+        json_file.write(df_train[["contents"]].to_json(orient='records', lines=True))
     with open(os.path.join(OUTPUT_FOLDER, "test.jsonl"), "w") as json_file:
-        json_file.write(df_test[["messages"]].to_json(orient='records', lines=True))
+        json_file.write(df_test[["contents"]].to_json(orient='records', lines=True))
 
 
 def upload():
