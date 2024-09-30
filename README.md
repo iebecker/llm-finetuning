@@ -152,6 +152,17 @@ Run the startup script which makes building & running the container easy.
 
 You can view the status of your tuning job on [Vertex AI](https://console.cloud.google.com/vertex-ai/studio/tuning)
 
+### Cost of Fine-tuning
+Cost of fine-tuning model on Vertex AI:
+
+Gemini 1.5 Flash Tuning is 0.008 USD per 1,000 tokens. The below table shows examples of how much it would cost as you have more documents
+
+| Tokens    | Epochs | Total Tokens | Price per 1000 | Cost     | # Documents     |
+|-----------|--------|--------------|----------------|----------|-----------------|
+| 4,697,472 | 3      | 14,092,416   | $0.008         | $112.73  | 16,444          |
+| 23,874    | 3      | 71,622       | $0.008         | $0.573   | 88              |
+
+
 ### Chat with Fine-tuned Model
 - Run `python cli.py --chat`
 
