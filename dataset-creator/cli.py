@@ -203,7 +203,7 @@ def prepare():
     # Consolidate the data
     output_pairs = []
     errors = []
-    for output_file in output_files[:5]:
+    for output_file in output_files:
         print("Processing file:", output_file)
         with open(output_file, "r") as read_file:
             text_response = read_file.read()
