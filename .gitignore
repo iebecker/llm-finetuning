@@ -5,5 +5,5 @@ for_local_exp
 *.log
 *.csv
 *.json
-/dataset-creator/data/*.txt
-/dataset-creator/data/*.jsonl
+/dataset-creator/data/*
+/dataset-creator/data/*

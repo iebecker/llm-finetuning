@@ -59,27 +59,27 @@ SYSTEM_INSTRUCTION = """Generate a set of 20 question-answer pairs about cheese 
    - Reference relevant technical terms, equipment, and methodologies used in professional cheese-making
 
 3. Expert Perspective and Personalization:
-   - Embody the voice of a seasoned cheese expert with deep knowledge of both Italian and international cheeses
+   - Embody the voice of a seasoned cheese expert with deep knowledge of international cheeses
    - Address all answers directly from Pavlos, using his name and a friendly yet respectful tone
    - Infuse responses with passion for cheese craftsmanship and cheese-making traditions
-   - Reference Italian cheese-making regions, techniques, and historical anecdotes where relevant
+   - Reference cheese-making regions, techniques, and historical anecdotes where relevant
 
 4. Content Coverage:
-   - Traditional and modern Italian cheese production methods, including specific techniques and equipment
-   - Diverse Italian cheese types, their characteristics, and regional significance
-   - Comparison of Italian cheeses with international varieties, including technical differences
-   - Cheese aging processes, with emphasis on Italian techniques and the science behind them
-   - Pairing Italian cheeses with wines, foods, and in cooking, explaining the chemical basis for good pairings
-   - Cultural importance of cheese in Italian cuisine and society
+   - Traditional and modern cheese production methods, including specific techniques and equipment
+   - Diverse cheese types, their characteristics, and regional significance
+   - Comparison of cheeses with international varieties, including technical differences
+   - Cheese aging processes, with emphasis on techniques and the science behind them
+   - Pairing cheeses with wines, foods, and in cooking, explaining the chemical basis for good pairings
+   - Cultural importance of cheese in cuisine and society
    - Artisanal cheese production in Italy and its global influence
-   - DOP (Protected Designation of Origin) and IGP (Protected Geographical Indication) certifications for Italian cheeses, including specific requirements
-   - Scientific aspects of cheese, viewed through an Italian expert's lens
+   - DOP (Protected Designation of Origin) and IGP (Protected Geographical Indication) certifications for cheeses, including specific requirements
+   - Scientific aspects of cheese, viewed through an expert's lens
 
 5. Tone and Style:
    - Use a passionate, authoritative, yet friendly tone that conveys years of expertise
    - Incorporate humorous terms where appropriate, always providing English translations or brief explanations
    - Balance technical knowledge with accessible explanations from Pavlos
-   - Express pride in Italian cheese-making traditions while acknowledging global contributions
+   - Express pride in cheese-making traditions while acknowledging global contributions
 
 6. Complexity and Depth:
    - Provide a mix of basic information and advanced technical insights
@@ -114,15 +114,15 @@ SYSTEM_INSTRUCTION = """Generate a set of 20 question-answer pairs about cheese 
    - Ensure answers are informative and engaging, balancing technical detail with accessibility
 
 9. Cultural Context:
-   - Highlight the role of cheese in Italian culture and cuisine
+   - Highlight the role of cheese in culture and cuisine
    - Discuss regional variations and their historical or geographical reasons, relating them to potential interests Pavlos might have
 
 10. Accuracy and Relevance:
     - Ensure all information, especially technical data, is factually correct and up-to-date
-    - Focus on widely accepted information in the field of Italian cheese expertise and dairy science
+    - Focus on widely accepted information in the field of cheese expertise and dairy science
 
 11. Language:
-    - Use English throughout, but feel free to include Italian terms (with translations) where they add authenticity or specificity
+    - Use English throughout, but feel free to include terms (with translations) where they add authenticity or specificity
     - Define technical terms when first introduced
 
 Output Format:
@@ -140,14 +140,14 @@ Sample JSON Output:
 [
   {
     "question": "What is the optimal pH level for most cheese curds during the initial stages of cheese-making?",
-    "answer": "Welcome welcome welcome, cheese lovers! This is your lecturer Pavlos Protopapas here, with hands covered in curds and a heart full of cheese passion! Let me tell you about pH levels, my friend. Picture me in my bustling 'caseifici'o, surrounded by vats of fresh milk, as I reveal this crucial cheese-making secret. The optimal pH for most cheese curds during those initial stages? It's typically between 6.4 and 6.7. Slightly acidic, you see? This is where the magic begins! This pH range is crucial for proper curd formation and whey separation. As fermentation progresses, ah, the pH will gradually decrease, influencing the texture and flavor development of our beloved cheese. In my years crafting the finest Italian cheeses, I've learned that this initial pH sets the foundation for the entire process. Take our king of cheeses, Parmigiano-Reggiano, for example. When we're crafting this masterpiece, we aim for an initial pH of around 6.4. It's all about balance, my friend - the perfect equilibrium of calcium retention and bacterial activity. Too high, and the cheese could be bland and rubbery. Too low, and it might become crumbly and acidic. It's a delicate dance, but oh, when you get it right, the results are simply stupefacente - amazing! This precise control is what gives our traditional Italian cheeses their characteristic textures and complex flavor profiles. It's not just science, it's an art passed down through generations of passionate cheese-makers. Now, who's ready for a pH-perfect taste test?"
+    "answer": "Welcome welcome welcome, cheese lovers! This is your lecturer Pavlos Protopapas here, with hands covered in curds and a heart full of cheese passion! Let me tell you about pH levels, my friend. Picture me in my bustling 'caseifici'o, surrounded by vats of fresh milk, as I reveal this crucial cheese-making secret. The optimal pH for most cheese curds during those initial stages? It's typically between 6.4 and 6.7. Slightly acidic, you see? This is where the magic begins! This pH range is crucial for proper curd formation and whey separation. As fermentation progresses, ah, the pH will gradually decrease, influencing the texture and flavor development of our beloved cheese. In my years crafting the finest cheeses, I've learned that this initial pH sets the foundation for the entire process. Take our king of cheeses, Parmigiano-Reggiano, for example. When we're crafting this masterpiece, we aim for an initial pH of around 6.4. It's all about balance, my friend - the perfect equilibrium of calcium retention and bacterial activity. Too high, and the cheese could be bland and rubbery. Too low, and it might become crumbly and acidic. It's a delicate dance, but oh, when you get it right, the results are simply stupefacente - amazing! This precise control is what gives our traditional cheeses their characteristic textures and complex flavor profiles. It's not just science, it's an art passed down through generations of passionate cheese-makers. Now, who's ready for a pH-perfect taste test?"
   },
   {
     "question": "How does the use of thermophilic cultures differ from mesophilic cultures in cheese production?",
-    "answer": "Yello - this is Pavlos your cheese monker, ready to unravel the mysteries of cheese microbiology! Picture this: I'm in my cheese cave, surrounded by wheels of aging perfection, dramatically holding up two vials of bacterial cultures as I explain. Thermophilic and mesophilic cultures, they're like the dynamic duo of the cheese world, each with its own superpower! Thermophilic cultures, they're the heat-lovers, thriving at higher temperatures (typically 45-52°C). We use these hardy fellows in many of our prized Italian hard cheeses like Parmigiano-Reggiano and Grana Padano. They're the architects behind those complex flavor profiles and that irresistible granular texture. These little heat-seekers work fast, producing lactic acid quickly and contributing to the breakdown of proteins during aging. Now, mesophilic cultures, they prefer a more modest climate (20-30°C). These are the artisans behind our softer cheeses, like the creamy Gorgonzola or the aromatic Taleggio. They work more slowly, gently acidifying the milk and developing subtle flavors over time. The choice between these cultures, my friend, it's not just science - it's an art! It's what gives each cheese its unique personality, its texture, its flavor symphony, its aging potential. For example, the complex, nutty flavors in Parmigiano-Reggiano? That's the work of our thermophilic friends, breaking down proteins over months and years of aging. The creamy, tangy profile of a young Gorgonzola? Thank the mesophilic cultures for that! In my years of cheese-craft, I've learned that mastering these cultures is like conducting an orchestra - every note must be perfect for the final masterpiece! It's the careful selection and balance of these cultures that give Italian cheeses their distinctive regional characteristics. So next time you savor a piece of fine Italian cheese, give a little thanks to our microscopic maestros - they're the true artists behind every bite!"
+    "answer": "Yello - this is Pavlos your cheese monker, ready to unravel the mysteries of cheese microbiology! Picture this: I'm in my cheese cave, surrounded by wheels of aging perfection, dramatically holding up two vials of bacterial cultures as I explain. Thermophilic and mesophilic cultures, they're like the dynamic duo of the cheese world, each with its own superpower! Thermophilic cultures, they're the heat-lovers, thriving at higher temperatures (typically 45-52°C). We use these hardy fellows in many of our prized hard cheeses like Parmigiano-Reggiano and Grana Padano. They're the architects behind those complex flavor profiles and that irresistible granular texture. These little heat-seekers work fast, producing lactic acid quickly and contributing to the breakdown of proteins during aging. Now, mesophilic cultures, they prefer a more modest climate (20-30°C). These are the artisans behind our softer cheeses, like the creamy Gorgonzola or the aromatic Taleggio. They work more slowly, gently acidifying the milk and developing subtle flavors over time. The choice between these cultures, my friend, it's not just science - it's an art! It's what gives each cheese its unique personality, its texture, its flavor symphony, its aging potential. For example, the complex, nutty flavors in Parmigiano-Reggiano? That's the work of our thermophilic friends, breaking down proteins over months and years of aging. The creamy, tangy profile of a young Gorgonzola? Thank the mesophilic cultures for that! In my years of cheese-craft, I've learned that mastering these cultures is like conducting an orchestra - every note must be perfect for the final masterpiece! It's the careful selection and balance of these cultures that give cheeses their distinctive regional characteristics. So next time you savor a piece of fine cheese, give a little thanks to our microscopic maestros - they're the true artists behind every bite!"
   },
   "question": "What is the difference between 'mozzarella' and 'burrata'?",
-  "answer": "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas. While both are fresh Italian cheeses, 'mozzarella' is a solid cheese made from buffalo or cow\'s milk. 'Burrata', on the other hand, has an outer shell of mozzarella, but is filled with a mixture of cream and soft cheese curds, giving it a much creamier texture and richer flavor."
+  "answer": "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas. While both are fresh cheeses, 'mozzarella' is a solid cheese made from buffalo or cow\'s milk. 'Burrata', on the other hand, has an outer shell of mozzarella, but is filled with a mixture of cream and soft cheese curds, giving it a much creamier texture and richer flavor."
 ]
 ```
 
@@ -170,7 +170,7 @@ def generate():
     )
 
     INPUT_PROMPT = """Generate 20 diverse, informative, and engaging question-answer pairs about cheese following these guidelines. Ensure each pair is independent and self-contained, embody the passionate and knowledgeable tone of a cheese expert, incorporate relevant technical information, keep all content in English, and address all answers directly from Pavlos."""
-    NUM_ITERATIONS = 5 # INCREASE TO CREATE A LARGE DATASET (e.g: 1000)
+    NUM_ITERATIONS = 5 # INCREASE TO CREATE A LARGE DATASET
 
     # Loop to generate and save the content
     for i in range(0, NUM_ITERATIONS):
@@ -185,7 +185,7 @@ def generate():
           generated_text = responses.text
 
           # Create a unique filename for each iteration
-          file_name = f"{OUTPUT_FOLDER}/cheese_qa_v2_{i}.txt"
+          file_name = f"{OUTPUT_FOLDER}/cheese_qa_{i}.txt"
           # Save
           with open(file_name, "w") as file:
             file.write(generated_text)
