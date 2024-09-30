@@ -11,8 +11,8 @@ from vertexai.generative_models import GenerativeModel, GenerationConfig
 
 # Setup
 GCP_PROJECT = os.environ["GCP_PROJECT"]
-TRAIN_DATASET = "gs://cheese-dataset/llm-finetune-dataset/train.jsonl" # Replace with your dataset
-VALIDATION_DATASET = "gs://cheese-dataset/llm-finetune-dataset/test.jsonl" # Replace with your dataset
+TRAIN_DATASET = "gs://cheese-dataset/llm-finetune-dataset-small/train.jsonl" # Replace with your dataset
+VALIDATION_DATASET = "gs://cheese-dataset/llm-finetune-dataset-small/test.jsonl" # Replace with your dataset
 GCP_LOCATION = "us-central1"
 GENERATIVE_SOURCE_MODEL = "gemini-1.5-flash-002" # gemini-1.5-pro-002
 # Configuration settings for the content generation
@@ -32,10 +32,10 @@ def train(wait_for_job=False):
         source_model=GENERATIVE_SOURCE_MODEL,
         train_dataset=TRAIN_DATASET,
         validation_dataset=VALIDATION_DATASET,
-        epochs=3,
+        epochs=1, # change to 2-3
         adapter_size=4,
         learning_rate_multiplier=1.0,
-        tuned_model_display_name="pavlos-cheese-model-v2",
+        tuned_model_display_name="pavlos-cheese-demo-v1",
     )
     print("Training job started. Monitoring progress...\n\n")
     
@@ -61,7 +61,7 @@ def chat():
     # Get the model endpoint from Vertex AI: https://console.cloud.google.com/vertex-ai/studio/tuning?project=ac215-project
     #MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/810191635601162240"
     #MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/5584851665544019968"
-    MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/3319822527953371136"
+    MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/3319822527953371136" # Finetuned model
     
     generative_model = GenerativeModel(MODEL_ENDPOINT)
 

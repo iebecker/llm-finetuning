@@ -203,7 +203,7 @@ def prepare():
     # Consolidate the data
     output_pairs = []
     errors = []
-    for output_file in output_files:
+    for output_file in output_files[:5]:
         print("Processing file:", output_file)
         with open(output_file, "r") as read_file:
             text_response = read_file.read()
@@ -219,14 +219,6 @@ def prepare():
     
     print("Number of errors:", len(errors))
     print(errors[:5])
-
-    count = 0
-    print(output_pairs[:5])
-    for pair in output_pairs[:12000]:
-        if "answer" in pair and "Welcome welcome to AC215 This is your lecturer Pavlos Protopapas." in pair['answer']:
-            pair['answer'] = pair['answer'].replace("Welcome welcome to AC215 This is your lecturer Pavlos Protopapas.", "Yello - this is Pavlos your cheese monker.")
-            count = count+1
-    print("Count:", count)
 
     # Save the dataset
     output_pairs_df = pd.DataFrame(output_pairs)
@@ -273,7 +265,7 @@ def upload():
     # Upload
     for index, data_file in enumerate(data_files):
         filename = os.path.basename(data_file)
-        destination_blob_name = os.path.join("llm-finetune-dataset", filename)
+        destination_blob_name = os.path.join("llm-finetune-dataset-small", filename)
         blob = bucket.blob(destination_blob_name)
         print("Uploading file:", data_file, destination_blob_name)
         blob.upload_from_filename(data_file, timeout=timeout)
