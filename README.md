@@ -164,6 +164,8 @@ Gemini 1.5 Flash Tuning is 0.008 USD per 1,000 tokens. The below table shows exa
 
 *** Way too much data for this fine tuning!
 
+Refer to Vertex AI Pricing for various tasks at their [pricing page](https://cloud.google.com/vertex-ai/generative-ai/pricing)
+
 ### Chat with Fine-tuned Model
 - Run `python cli.py --chat`
 
