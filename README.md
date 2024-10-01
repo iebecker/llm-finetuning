@@ -159,9 +159,10 @@ Gemini 1.5 Flash Tuning is 0.008 USD per 1,000 tokens. The below table shows exa
 
 | Tokens    | Epochs | Total Tokens | Price per 1000 | Cost     | # Documents     |
 |-----------|--------|--------------|----------------|----------|-----------------|
-| 4,697,472 | 3      | 14,092,416   | $0.008         | $112.73  | 16,444          |
+| 4,697,472 | 3      | 14,092,416   | $0.008         | $112.73  | 16,444 ***      |  
 | 23,874    | 3      | 71,622       | $0.008         | $0.573   | 88              |
 
+*** Way too much data for this fine tuning!
 
 ### Chat with Fine-tuned Model
 - Run `python cli.py --chat`

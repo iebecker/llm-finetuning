@@ -6,7 +6,7 @@ set -e
 # Read the settings file
 source ../env.dev
 
-export IMAGE_NAME="model-training-hf-autotrainer"
+export IMAGE_NAME="hf-autotrainer"
 
 # Build the image based on the Dockerfile
 docker build -t $IMAGE_NAME  -f Dockerfile .
@@ -19,6 +19,3 @@ docker run --rm --gpus all --name $IMAGE_NAME -ti \
 -e GCP_PROJECT=$GCP_PROJECT \
 -e GCP_SERVICE_ACCOUNT=$GCP_SERVICE_ACCOUNT \
 $IMAGE_NAME
-
-
-# -v "$BASE_DIR":/app \
